@@ -1,5 +1,7 @@
 package com.lagou.edu.factory;
 
+import com.lagou.edu.annotation.Autowired;
+import com.lagou.edu.annotation.Service;
 import com.lagou.edu.utils.ConnectionUtils;
 
 import java.sql.Connection;
@@ -12,8 +14,10 @@ import java.sql.SQLException;
  * @Version: 1.0
  * @Date: 2021-12-09 09:33
  */
+@Service("transcationManager")
 public class TranscationManager {
 
+    @Autowired
     private ConnectionUtils connectionUtils;
 
     public ConnectionUtils getConnectionUtils() {

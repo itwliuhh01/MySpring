@@ -1,7 +1,6 @@
 package com.lagou.edu.servlet;
 
-import com.lagou.edu.factory.BeanFactory;
-import com.lagou.edu.factory.BeanProxyFactory;
+import com.lagou.edu.factory.AnnoBeanFactory;
 import com.lagou.edu.pojo.Result;
 import com.lagou.edu.service.TransferService;
 import com.lagou.edu.utils.JsonUtils;
@@ -21,9 +20,14 @@ public class TransferServlet extends HttpServlet {
 
 
     // 1. 实例化service层对象
-    BeanProxyFactory beanProxyFactory = (BeanProxyFactory)BeanFactory.getInstance().getBean("beanProxyFactory");
-    private TransferService transferService = (TransferService)beanProxyFactory.getJdkProxy(BeanFactory.getInstance().getBean("transferServiceImpl"));
+//    BeanProxyFactory beanProxyFactory = (BeanProxyFactory)BeanFactory.getInstance().getBean("beanProxyFactory");
+//    private TransferService transferService = (TransferService)beanProxyFactory.getJdkProxy(BeanFactory.getInstance().getBean("transferServiceImpl"));
 
+    TransferService transferService = (TransferService) AnnoBeanFactory.getInstance().getBean("transferService");
+
+
+//    @Autowired
+//    private TransferService transferService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,11 +44,8 @@ public class TransferServlet extends HttpServlet {
         String toCardNo = req.getParameter("toCardNo");
         String moneyStr = req.getParameter("money");
         int money = Integer.parseInt(moneyStr);
-
         Result result = new Result();
-
         try {
-
             // 2. 调用service层方法
             transferService.transfer(fromCardNo,toCardNo,money);
             result.setStatus("200");

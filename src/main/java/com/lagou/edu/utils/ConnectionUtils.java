@@ -1,5 +1,7 @@
 package com.lagou.edu.utils;
 
+import com.lagou.edu.annotation.Service;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -11,6 +13,7 @@ import java.util.Objects;
  * @Version: 1.0
  * @Date: 2021-12-09 09:04
  */
+@Service
 public class ConnectionUtils {
 
     private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
